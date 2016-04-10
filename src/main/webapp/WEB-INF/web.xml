@@ -5,6 +5,26 @@
 	id="schedule-console" version="3.0">
 	<!--下面是项目名称/欢迎页面，随意，对解决该问题没有帮助，为了方便全粘进去吧-->
 	<display-name>yuanote</display-name>
+	    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.gif</url-pattern>
+        <url-pattern>*.png</url-pattern>
+        <url-pattern>*.jpg</url-pattern>
+        <url-pattern>*.js</url-pattern>
+        <url-pattern>*.css</url-pattern>
+        <url-pattern>*.xml</url-pattern>
+        <url-pattern>*.html</url-pattern>
+        <url-pattern>*.chm</url-pattern>
+        <url-pattern>*.gz</url-pattern>
+        <url-pattern>*.txt</url-pattern>
+        <url-pattern>*.ttf</url-pattern>
+        <url-pattern>*.woff</url-pattern>
+        <url-pattern>*.woff2</url-pattern>
+        <url-pattern>*.eot</url-pattern>
+        <url-pattern>*.svg</url-pattern>
+        <url-pattern>*.swf</url-pattern>
+        <url-pattern>*.jst</url-pattern>
+    </servlet-mapping>
 	<!-- Spring和mybatis的配置文件 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -47,7 +67,7 @@
 	<servlet-mapping>
 		<servlet-name>SpringMVC</servlet-name>
 		<!-- 此处可以可以配置成*.do，对应struts的后缀习惯 -->
-		<url-pattern>/</url-pattern>
+		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
 	<!-- 首页 -->
 	<welcome-file-list>

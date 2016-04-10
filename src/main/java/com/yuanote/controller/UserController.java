@@ -15,11 +15,12 @@ import com.yuanote.service.IUserService;
 public class UserController {
 	@Autowired
 	private IUserService userService;
+	
 	@RequestMapping("/getUser")
 	public String test(HttpServletRequest request, Model model) {
-		User user = this.userService.getUserById(Long.parseLong(request.getParameter("id")));
-		String userName = user.getName();
-		model.addAttribute("user", userName);
-		return "login";
+//		User user = this.userService.getUserById(Long.parseLong(request.getParameter("id")));
+//		String userName = user.getName();
+//		model.addAttribute("user", userName);
+		return "redirect:/login";
 	}
 }
