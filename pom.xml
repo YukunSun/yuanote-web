@@ -93,7 +93,6 @@
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
 			<version>7.0</version>
-			<scope>test</scope>
 		</dependency>
 		<!-- 导入Mysql数据库链接jar包 -->
 		<dependency>

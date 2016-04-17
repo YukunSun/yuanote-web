@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yuanote.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.yuanote.domain.User" >
+    <id column="sid" property="sid" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="come_time" property="comeTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid, name, password, age, sex, address, come_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where sid = #{sid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user
+    where sid = #{sid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.yuanote.domain.User" >
+    insert into user (sid, name, password, 
+      age, sex, address, 
+      come_time)
+    values (#{sid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{comeTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yuanote.domain.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="comeTime != null" >
+        come_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="comeTime != null" >
+        #{comeTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yuanote.domain.User" >
+    update user
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="comeTime != null" >
+        come_time = #{comeTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yuanote.domain.User" >
+    update user
+    set name = #{name,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      come_time = #{comeTime,jdbcType=TIMESTAMP}
+    where sid = #{sid,jdbcType=BIGINT}
+  </update>
+</mapper>

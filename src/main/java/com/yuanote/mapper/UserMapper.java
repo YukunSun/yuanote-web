@@ -2,7 +2,7 @@ package com.yuanote.mapper;
 
 import com.yuanote.domain.User;
 
-public interface IUserMapper {
+public interface UserMapper {
 	int deleteByPrimaryKey(Long sid);
 
 	int insert(User record);
