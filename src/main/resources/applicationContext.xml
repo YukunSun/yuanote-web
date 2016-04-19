@@ -24,6 +24,16 @@
 	<!-- 开启IOC注解扫描 ,也可以不单独扫描controller,service-->
 	<context:component-scan base-package="com.yuanote.controller" />
 	<context:component-scan base-package="com.yuanote.service" />
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<!-- 登录检查拦截器 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/user/*"/>
+			<bean class="com.yuanote.interceptor.LoginInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
 	<!--避免IE执行AJAX时，返回JSON出现下载文件 -->
 	<bean id="mappingJacksonHttpMessageConverter"
 		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
