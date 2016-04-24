@@ -12,7 +12,7 @@ public class TestUser {
 	@Test
 	public void testAddUser() throws Exception {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml",
-				"applicationContext-dao.xml");
+				"applicationContext-servlet.xml");
 		IUserService userService = ctx.getBean(IUserService.class);
 		User user = new User();
 		user.setUserName("lisi");
@@ -27,7 +27,7 @@ public class TestUser {
 	@Test
 	public void testFindUser() throws Exception {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml",
-				"applicationContext-dao.xml");
+				"applicationContext-servlet.xml");
 		IUserService userService = ctx.getBean(IUserService.class);
 		User user =userService.findUser("lisi");
 		System.out.println("=================="+user+"==============");

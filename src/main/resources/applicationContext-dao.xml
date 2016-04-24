@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
-    xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
-    xmlns:cache="http://www.springframework.org/schema/cache"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
     http://www.springframework.org/schema/aop
     http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
@@ -13,55 +13,39 @@
     http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
     http://www.springframework.org/schema/cache 
     http://www.springframework.org/schema/cache/spring-cache-4.0.xsd">
-    <!-- 读取数据库连接的属性文件 -->
-    <context:property-placeholder location="classpath:jdbc.properties" />
-    <!-- 配置数据库连接池 -->
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-        destroy-method="close">
-        <property name="driverClassName" value="${jdbc.driver}" />
-        <property name="url" value="${jdbc.url}" />
-        <property name="username" value="${jdbc.username}" />
-        <property name="password" value="${jdbc.password}" />
-        <!-- 初始化连接大小 -->
-        <property name="initialSize" value="${initialSize}"></property>
-        <!-- 连接池最大数量 -->
-        <property name="maxActive" value="${maxActive}"></property>
-        <!-- 连接池最大空闲 -->
-        <property name="maxIdle" value="${maxIdle}"></property>
-        <!-- 连接池最小空闲 -->
-        <property name="minIdle" value="${minIdle}"></property>
-        <!-- 获取连接最大等待时间 -->
-        <property name="maxWait" value="${maxWait}"></property>
-    </bean>
-
-    <!-- DAO接口所在包名，Spring会自动查找其下的类  TODO -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.yuanote.mapper" />
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
-    </bean>
-    
-    <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件  -->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <!-- 自动扫描mapper.xml文件  TODO-->
-        <property name="configLocation" value="classpath:SqlMapConfig.xml"></property>
-    </bean>
-	
-    <!-- 声明式事务 -->
-	<bean id="txManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
+	<!-- 配置数据库连接池 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<!-- 初始化连接大小 -->
+		<property name="initialSize" value="${initialSize}"></property>
+		<!-- 连接池最大数量 -->
+		<property name="maxActive" value="${maxActive}"></property>
+		<!-- 连接池最大空闲 -->
+		<property name="maxIdle" value="${maxIdle}"></property>
+		<!-- 连接池最小空闲 -->
+		<property name="minIdle" value="${minIdle}"></property>
+		<!-- 获取连接最大等待时间 -->
+		<property name="maxWait" value="${maxWait}"></property>
 	</bean>
-	<tx:advice id="txAdvice" transaction-manager="txManager">
-		<tx:attributes>
-			<!-- <tx:method name="find*" read-only="true" /> -->
-			<tx:method name="find*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
-			<tx:method name="add*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
-			<tx:method name="update*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
-			<tx:method name="delete*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
-			<tx:method name="create*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
-		</tx:attributes>
-	</tx:advice>
 
-	
+	<!-- DAO接口所在包名，Spring会自动查找其下的类 TODO -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.yuanote.mapper" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- 自动扫描mapper.xml文件 TODO -->
+		<property name="configLocation" value="classpath:SqlMapConfig.xml"></property>
+	</bean>
+
+	<!-- 在applicationContext-servlet.xml下配置事务是不起作用的 -->
+	<!-- 配置事务 -->
+
 </beans>

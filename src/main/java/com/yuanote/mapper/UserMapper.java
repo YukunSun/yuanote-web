@@ -3,13 +3,9 @@ package com.yuanote.mapper;
 import com.yuanote.domain.User;
 
 public interface UserMapper {
-
-	int insertSelective(User user);
-
-	User selectByPrimaryKey(String ynUserId);
+	void insertSelective(User user);
 	
-	User selectByUserName(String userName);
-
-	int updateByPrimaryKeySelective(User record);
-
+	User selectByName(String userName);
+	
+	void updateByPrimaryKeySelective(User user);
 }

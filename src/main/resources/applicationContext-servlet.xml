@@ -15,17 +15,26 @@
 	http://www.springframework.org/schema/cache/spring-cache-4.0.xsd
 	http://www.springframework.org/schema/mvc 
 	http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd ">
-	<!-- FIXME 在此文件下去掉对controller的扫描 -->
-	<context:component-scan base-package="com.yuanote.service.impl" />
 
-	<bean id="propertyConfigurer"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="locations">
-			<list>
-				<value>classpath:jdbc.properties</value>
-			</list>
-		</property>
+	<!-- 开启MVC注解扫描 -->
+	<mvc:annotation-driven />
+	<!-- 开启IOC注解扫描 ,在applicationContext-servlet下去掉对service的扫描  FIXME-->
+	<context:component-scan base-package="com.yuanote.controller" />
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<!-- 登录检查拦截器 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/user/*" />
+			<bean class="com.yuanote.interceptor.LoginInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<!-- 处理请求转发 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 -->
+		<property name="prefix" value="/WEB-INF/view/" />
+		<property name="suffix" value=".html" />
 	</bean>
-
-	<import resource="applicationContext-dao.xml" />
 </beans>

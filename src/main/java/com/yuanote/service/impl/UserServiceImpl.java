@@ -2,9 +2,6 @@ package com.yuanote.service.impl;
 
 import java.util.Map;
 
-import javax.annotation.Resource;
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +13,12 @@ import com.yuanote.service.IUserService;
 
 @Service
 public class UserServiceImpl implements IUserService {
-	@Resource
+	@Autowired
 	private UserMapper userMapper;
 
 	@Override
 	public User findUser(String userName) {
-		User user = this.userMapper.selectByUserName(userName);
+		User user = this.userMapper.selectByName(userName);
 		return user;
 	}
 
