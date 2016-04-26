@@ -6,11 +6,13 @@ $(function() {
 	$("#register_btn").click(function() {
 		register();
 	});
-
 });
 function login() {
 	var userName = $("#username").val();
 	var pwd = $("#pwd").val();
+	if (userName == "" || pwd == "") {
+		return false;
+	}
 	$.ajax({
 		type : "POST",
 		url : basePath + "user/login",
@@ -19,11 +21,14 @@ function login() {
 			password : pwd
 		},
 		success : function(result) {
-			//
+			if (result.status == 0) {
+				alert(result.message);
+			}
+		},
+		error : function(xhr, status, error) {
+			alert("请求失败！");
 		}
 	});
-
-	alert(pwd);
 }
 
 function register() {
@@ -36,10 +41,15 @@ function register() {
 	$.ajax({
 		type : "POST",
 		url : basePath + "user/register",
-		dataType:"JSON",
+		dataType : "JSON",
 		data : user,
 		success : function(result) {
-			//
+//			if (result.status == 0) {
+//				alert(result.message);
+//			}
+		},
+		error : function(xhr, status, error) {
+			alert("请求失败！");
 		}
 	});
 

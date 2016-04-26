@@ -69,7 +69,7 @@ public class MD5Util {
 	}
 
 	public static void main(String[] args) {
-		MD5Util m = new MD5Util("");
+		MD5Util m = new MD5Util("zhangsan");
 		System.out.println(m.getResult());
 	}
 }

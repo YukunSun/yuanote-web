@@ -5,13 +5,12 @@
 		<id column="yn_user_id" property="userId" jdbcType="VARCHAR" />
 		<result column="yn_user_name" property="userName" jdbcType="VARCHAR" />
 		<result column="yn_user_password" property="password" jdbcType="VARCHAR" />
-		<result column="yn_user_desc" property="userDesc" jdbcType="LONGVARCHAR" />
+		<result column="yn_user_desc" property="userDesc" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		yn_user_id, yn_user_name, yn_user_password,yn_user_desc
 	</sql>
-	<select id="selectByName" resultMap="BaseResultMap"
-		parameterType="java.lang.String">
+	<select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from yn_user
@@ -44,7 +43,7 @@
 				#{password,jdbcType=VARCHAR},
 			</if>
 			<if test="userDesc != null">
-				#{userDesc,jdbcType=LONGVARCHAR},
+				#{userDesc,jdbcType=VARCHAR},
 			</if>
 		</trim>
 	</insert>
@@ -58,7 +57,7 @@
 				yn_user_password = #{password,jdbcType=VARCHAR},
 			</if>
 			<if test="userDesc != null">
-				yn_user_desc = #{userDesc,jdbcType=LONGVARCHAR},
+				yn_user_desc = #{userDesc,jdbcType=VARCHAR},
 			</if>
 		</set>
 		where yn_user_id = #{userId,jdbcType=VARCHAR}
