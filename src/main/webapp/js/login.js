@@ -16,13 +16,14 @@ function login() {
 	$.ajax({
 		type : "POST",
 		url : basePath + "user/login",
+		dataType:"json",
 		data : {
 			userName : userName,
 			password : pwd
 		},
 		success : function(result) {
+			alert(result.message);
 			if (result.status == 0) {
-				alert(result.message);
 			}
 		},
 		error : function(xhr, status, error) {

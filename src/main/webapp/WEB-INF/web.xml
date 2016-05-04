@@ -23,6 +23,8 @@
 		<url-pattern>*.svg</url-pattern>
 		<url-pattern>*.swf</url-pattern>
 		<url-pattern>*.jst</url-pattern>
+		<!-- FIXME -->
+		<url-pattern>*.map</url-pattern>
 	</servlet-mapping>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
