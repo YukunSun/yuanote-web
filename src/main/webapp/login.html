@@ -14,18 +14,18 @@
 <script type="text/javascript" src="js/base.js"></script>
 </head>
 <body>
-	<form class="form-horizontal" id="login_form" action="user/login">
+	<form class="form-horizontal" id="login_form">
 		<div class="form-group">
 			<label for="firstname" class="col-sm-2 control-label">用户名</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" id="username" name="userName"
+				<input type="text" class="form-control" name="userName"
 					placeholder="请输入用户名" required autofocus>
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="lastname" class="col-sm-2 control-label">密码</label>
 			<div class="col-sm-10">
-				<input type="password" class="form-control" id="pwd" name="password"
+				<input type="password" class="form-control" name="password"
 					placeholder="请输入密码" required>
 			</div>
 		</div>
@@ -41,9 +41,52 @@
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
 				<button type="submit" class="btn btn-default" id="login_btn">登录</button>
-				<button type="button" class="btn btn-default" id="register_btn">注册</button>
+				<button type="button" class="btn btn-default" id="to_register">注册</button>
 			</div>
 		</div>
 	</form>
+	<!-- 注册form -->
+	<form class="form-horizontal" id="register_form">
+		<div class="form-group">
+			<label for="firstname" class="col-sm-2 control-label">用户名</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="userName"
+					placeholder="请输入用户名" required autofocus>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="lastname" class="col-sm-2 control-label">密码</label>
+			<div class="col-sm-10">
+				<input type="password" class="form-control" id="reg_pwd_1" name="password"
+					placeholder="请输入密码" required>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="lastname" class="col-sm-2 control-label">确认密码</label>
+			<div class="col-sm-10">
+				<input type="password" class="form-control" id="reg_pwd_2"
+					placeholder="请再次输入密码" required>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-default" id="register_btn">确认注册</button>
+				<button type="button" class="btn btn-default" id="to_login">返回</button>
+			</div>
+		</div>
+	</form>
+	<script>
+		$(document).ready(function() {
+			$("#register_form").hide();
+			$("#to_register").click(function() {
+				$("#login_form").hide();
+				$("#register_form").show();
+			});
+			$("#to_login").click(function() {
+				$("#login_form").show();
+				$("#register_form").hide();
+			});
+		});
+	</script>
 </body>
 </html>

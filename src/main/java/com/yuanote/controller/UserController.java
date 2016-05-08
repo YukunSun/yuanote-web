@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.yuanote.common.MD5Util;
+import com.yuanote.common.Md5Util;
 import com.yuanote.domain.Result;
 import com.yuanote.domain.User;
 import com.yuanote.service.IUserService;
@@ -26,9 +26,10 @@ public class UserController {
 			if (null == tmpUser) {
 				result.setMessage("用户不存在，请注册！");
 			} else {
-				if (!tmpUser.getPassword().equals(new MD5Util(user.getPassword()).getResult())) {
+				if (!tmpUser.getPassword().equals(Md5Util.getMd5(user.getPassword()))) {
 					result.setMessage("密码错误！");
 				} else {
+					result.setStatus(1);
 					result.setMessage("恭喜，登录成功！");
 				}
 			}
@@ -39,12 +40,14 @@ public class UserController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public Result register(User user) throws Exception {
-		user.setUserName("zhangsan");
-		user.setPassword("ppp");
+		Result result = new Result();
 		boolean flag = this.userService.addUser(user);
-		return new Result(flag);
+		if (flag == true) {
+			result.setStatus(1);
+		}
+		return result;
 	}
 
 

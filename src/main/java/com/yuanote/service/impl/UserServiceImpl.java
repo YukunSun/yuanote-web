@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yuanote.common.BusinessExceptionUtil;
+import com.yuanote.common.Md5Util;
 import com.yuanote.common.UUIDUtil;
 import com.yuanote.domain.User;
 import com.yuanote.mapper.UserMapper;
@@ -26,6 +27,7 @@ public class UserServiceImpl implements IUserService {
 	public boolean addUser(User user) throws Exception {
 		if (checkUserName(user)) {
 			user.setUserId(UUIDUtil.getUUID());
+			user.setPassword(Md5Util.getMd5(user.getPassword()));
 			this.userMapper.insertSelective(user);
 		} else {
 			return false;

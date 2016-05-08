@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>云笔记</title>
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link href="common/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="common/jquery/2.2.3/js/jquery-2.2.3.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="common/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="common/jquery/jquery.form.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
+<script type="text/javascript" src="js/base.js"></script>
+</head>
+<body>
+	<p>//进入编辑系统</p>
+	<script>
+		$(document).ready(function() {
+			$("#register_form").hide();
+			$("#to_register").click(function() {
+				$("#login_form").hide();
+				$("#register_form").show();
+			});
+			$("#to_login").click(function() {
+				$("#login_form").show();
+				$("#register_form").hide();
+			});
+		});
+	</script>
+</body>
+</html>
