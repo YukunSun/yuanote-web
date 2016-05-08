@@ -14,6 +14,8 @@ function login() {
 		url : basePath + "user/login",
 		success : function(result) {
 			alert(result.message);// 弹出ajax请求后的回调结果
+			//进入系统
+			location.href="edit.html";
 		}
 	};
 	// 将options传给ajaxForm
@@ -34,8 +36,6 @@ function register() {
 		success : function(result) {
 			if (1 == result.status) {
 				alert("注册成功！");
-				//进入系统
-				location.href="edit.html";
 			} else if (0 == result.status) {
 				alert("用户已存在！");
 			}
