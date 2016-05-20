@@ -61,7 +61,8 @@
 		</tx:attributes>
 	</tx:advice>
 	<aop:config proxy-target-class="true">
-		<aop:advisor advice-ref="txAdvice" pointcut="within(com.tarena.service..*)" />
+	<!-- TODO -->
+		<aop:advisor advice-ref="txAdvice" pointcut="within(com.yuanote.service..*)" />
 	</aop:config>
 
 </beans>

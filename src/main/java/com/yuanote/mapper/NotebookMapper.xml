@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yuanote.mapper.NotebookMapper" >
+  <resultMap id="BaseResultMap" type="com.yuanote.domain.Notebook" >
+    <id column="sid" property="sid" jdbcType="BIGINT" />
+    <result column="yn_user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="yn_notebook_type_id" property="notebookTypeId" jdbcType="VARCHAR" />
+    <result column="yn_notebook_name" property="notebookName" jdbcType="VARCHAR" />
+    <result column="yn_notebook_createtime" property="notebookCreateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.yuanote.domain.Notebook" extends="BaseResultMap" >
+    <result column="yn_notebook_desc" property="notebookDesc" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid, yn_user_id, yn_notebook_type_id, yn_notebook_name, yn_notebook_createtime
+  </sql>
+  <sql id="Blob_Column_List" >
+    yn_notebook_desc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="com.yuanote.domain.Notebook" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from yn_notebook
+    where sid = #{sid,jdbcType=BIGINT}
+  </select>
+  
+  <!-- 通过其他条件查询，比如用户sid -->
+  <select id="selectByCriteria" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from yn_notebook
+    <where>
+    	<if test="sid != null" >
+        sid = #{sid,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        and yn_user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="notebookTypeId != null" >
+        and yn_notebook_type_id = #{notebookTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="notebookName != null" >
+        and yn_notebook_name = #{notebookName,jdbcType=VARCHAR},
+      </if>
+      <if test="notebookCreateTime != null" >
+        and yn_notebook_createtime #{notebookCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notebookDesc != null" >
+        and yn_notebook_desc = #{notebookDesc,jdbcType=VARCHAR},
+      </if>
+    </where>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from yn_notebook
+    where sid = #{sid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.yuanote.domain.Notebook" >
+    insert into yn_notebook (sid, yn_user_id, yn_notebook_type_id, 
+      yn_notebook_name, yn_notebook_createtime, 
+      yn_notebook_desc)
+    values (#{sid,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{notebookTypeId,jdbcType=VARCHAR}, 
+      #{notebookName,jdbcType=VARCHAR}, #{notebookCreateTime,jdbcType=TIMESTAMP}, 
+      #{notebookDesc,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yuanote.domain.Notebook" >
+    insert into yn_notebook
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="userId != null" >
+        yn_user_id,
+      </if>
+      <if test="notebookTypeId != null" >
+        yn_notebook_type_id,
+      </if>
+      <if test="notebookName != null" >
+        yn_notebook_name,
+      </if>
+      <if test="notebookCreateTime != null" >
+        yn_notebook_createtime,
+      </if>
+      <if test="notebookDesc != null" >
+        yn_notebook_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="notebookTypeId != null" >
+        #{notebookTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="notebookName != null" >
+        #{notebookName,jdbcType=VARCHAR},
+      </if>
+      <if test="notebookCreateTime != null" >
+        #{notebookCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notebookDesc != null" >
+        #{notebookDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yuanote.domain.Notebook" >
+    update yn_notebook
+    <set >
+      <if test="userId != null" >
+        yn_user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="notebookTypeId != null" >
+        yn_notebook_type_id = #{notebookTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="notebookName != null" >
+        yn_notebook_name = #{notebookName,jdbcType=VARCHAR},
+      </if>
+      <if test="notebookCreateTime != null" >
+        yn_notebook_createtime = #{notebookCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notebookDesc != null" >
+        yn_notebook_desc = #{notebookDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yuanote.domain.Notebook" >
+    update yn_notebook
+    set yn_user_id = #{userId,jdbcType=VARCHAR},
+      yn_notebook_type_id = #{notebookTypeId,jdbcType=VARCHAR},
+      yn_notebook_name = #{notebookName,jdbcType=VARCHAR},
+      yn_notebook_createtime = #{notebookCreateTime,jdbcType=TIMESTAMP},
+      yn_notebook_desc = #{notebookDesc,jdbcType=LONGVARCHAR}
+    where sid = #{sid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yuanote.domain.Notebook" >
+    update yn_notebook
+    set yn_user_id = #{userId,jdbcType=VARCHAR},
+      yn_notebook_type_id = #{notebookTypeId,jdbcType=VARCHAR},
+      yn_notebook_name = #{notebookName,jdbcType=VARCHAR},
+      yn_notebook_createtime = #{notebookCreateTime,jdbcType=TIMESTAMP}
+    where sid = #{sid,jdbcType=BIGINT}
+  </update>
+</mapper>

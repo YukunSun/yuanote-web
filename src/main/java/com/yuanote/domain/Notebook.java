@@ -10,11 +10,11 @@ import java.util.Date;
  */
 public class Notebook {
 	private Long sid;
-	private String userSid;
-	private Long notebookTypeSid;
+	private String userId;
+	private Long notebookTypeId;
 	private String notebookName;
 	private String notebookDesc;
-	private Date notebookcreateTime;
+	private Date notebookCreateTime;
 
 	public Long getSid() {
 		return sid;
@@ -24,20 +24,20 @@ public class Notebook {
 		this.sid = sid;
 	}
 
-	public String getUserSid() {
-		return userSid;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setUserSid(String userSid) {
-		this.userSid = userSid;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
-	public Long getNotebookTypeSid() {
-		return notebookTypeSid;
+	public Long getNotebookTypeId() {
+		return notebookTypeId;
 	}
 
-	public void setNotebookTypeSid(Long notebookTypeSid) {
-		this.notebookTypeSid = notebookTypeSid;
+	public void setNotebookTypeId(Long notebookTypeId) {
+		this.notebookTypeId = notebookTypeId;
 	}
 
 	public String getNotebookName() {
@@ -56,12 +56,12 @@ public class Notebook {
 		this.notebookDesc = notebookDesc;
 	}
 
-	public Date getNotebookcreateTime() {
-		return notebookcreateTime;
+	public Date getNotebookCreateTime() {
+		return notebookCreateTime;
 	}
 
-	public void setNotebookcreateTime(Date notebookcreateTime) {
-		this.notebookcreateTime = notebookcreateTime;
+	public void setNotebookCreateTime(Date notebookCreateTime) {
+		this.notebookCreateTime = notebookCreateTime;
 	}
 
 }

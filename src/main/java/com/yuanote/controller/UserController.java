@@ -1,5 +1,7 @@
 package com.yuanote.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +21,7 @@ public class UserController {
 
 	@ResponseBody
 	@RequestMapping("/login")
-	public Result login(User user) {
+	public Result login(User user,HttpSession session) {
 		Result result = new Result();
 		if (userValide(user) == true) {
 			User tmpUser = this.userService.findUser(user.getUserName());
@@ -30,6 +32,9 @@ public class UserController {
 					result.setMessage("密码错误！");
 				} else {
 					result.setStatus(1);
+					result.setData(user);
+					//TODO 只有userName,password
+					session.setAttribute("user", user);
 					result.setMessage("恭喜，登录成功！");
 				}
 			}
