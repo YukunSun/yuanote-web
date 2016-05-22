@@ -33,8 +33,7 @@ public class UserController {
 				} else {
 					result.setStatus(1);
 					result.setData(user);
-					//TODO 只有userName,password
-					session.setAttribute("user", user);
+					session.setAttribute("user", tmpUser);
 					result.setMessage("恭喜，登录成功！");
 				}
 			}

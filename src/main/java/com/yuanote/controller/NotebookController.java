@@ -34,4 +34,15 @@ public class NotebookController {
 		List<Notebook> lists = this.notebookService.findNotebook(notebook);
 		return new Result(lists);
 	}
+
+	@ResponseBody
+	@RequestMapping(value = "/create", method = { RequestMethod.GET, RequestMethod.POST })
+	public Result createNotebook(HttpServletRequest request, HttpSession session) {
+		
+		
+		
+		
+		
+		return null;
+	}
 }

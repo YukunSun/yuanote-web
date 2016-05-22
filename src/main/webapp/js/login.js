@@ -14,11 +14,14 @@ function login() {
 		url : basePath + "user/login",
 		success : function(result) {
 			alert(result.message);// 弹出ajax请求后的回调结果
-			//进入系统
-			location.href="edit.html";
-			//设置cookie过期时间为 1 hour
-			addCookie("userId",result.data.userId,1);
-			addCookie("userName",result.data.userName,1);
+			if (1 == result.status) {
+				// 进入系统
+				location.href = "edit.html";
+				// 设置cookie过期时间为 1 hour
+				// TODO addCookie("userId",result.data.userId,1);
+				addCookie("userName", result.data.userName, 1);
+			}
+			return false;
 		}
 	};
 	// 将options传给ajaxForm
